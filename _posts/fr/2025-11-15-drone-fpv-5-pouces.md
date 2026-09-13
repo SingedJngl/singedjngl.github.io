@@ -26,6 +26,7 @@ Conception, assemblage et configuration d'un drone FPV freestyle 5 pouces sous B
 - Comprendre le réglage des PID et du filtrage
 
 ## Matériel utilisé
+
 | Composant | Référence |
 |-----------|-----------|
 | Châssis | MotorRiot Tanq2 |
