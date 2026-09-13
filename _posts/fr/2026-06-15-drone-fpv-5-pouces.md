@@ -77,15 +77,12 @@ Liaisons principales :
 - Ajustement des filtres et des PID
 
 ## Problèmes rencontrés
-- Bruit vidéo
-- Solutions mises en œuvre
+- Bruit sur le retour vidéo lors d'accélération
+- Solutions mises en œuvre : simplement souder un condensateur sur l'ESC près de la batterie
 
 ## Résultats
-- Masse finale :
-- Autonomie en vol :
-- Comportement en vol :
-- Améliorations futures :
-
-## Médias
-Ajouter ici les photos, schémas de câblage ou vidéos.
+- Masse finale : 720g
+- Autonomie en vol : environ 5 minutes en freestyle
+- Comportement en vol : latence faible, bonne réactivité avec les moteur 1750KV meme si de part son poids, son inertie se fait ressentir
+- Améliorations futures : Je pourrais modéliser et imprimer un support pour une caméra d'action afin d'avoir un enregistrement de mes vols en bonne qualité vidéo
 
