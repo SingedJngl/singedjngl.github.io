@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="FPV 5"">
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0v24" fill="none" stroke="#e3e2dc" stroke-width="1"/>
+    </pattern>
+    <pattern id="G" width="120" height="120" patternUnits="userSpaceOnUse">
+      <rect width="120" height="120" fill="url(#g)"/>
+      <path d="M120 0H0v120" fill="none" stroke="#d6d5cc" stroke-width="1.4"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="#f6f5ef"/>
+  <rect width="1200" height="675" fill="url(#G)"/>
+  <text x="48" y="628" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="22" fill="#8b8d8a">FPV 5" — image de garde a remplacer</text>
+</svg>

@@ -1,0 +1,7 @@
+{%- assign _m = include.date | date: "%-m" | minus: 1 -%}
+{%- assign _months = site.data.i18n[include.lang].months -%}
+{%- if include.lang == "en" -%}
+{{ _months[_m] }} {{ include.date | date: "%-d" }}, {{ include.date | date: "%Y" }}
+{%- else -%}
+{{ include.date | date: "%-d" }} {{ _months[_m] }} {{ include.date | date: "%Y" }}
+{%- endif -%}

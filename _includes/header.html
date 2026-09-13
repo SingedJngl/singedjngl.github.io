@@ -1,0 +1,16 @@
+{%- assign t = site.data.i18n[page.lang] -%}
+{%- if page.lang == "en" -%}{%- assign home = "/en/" -%}{%- assign about = "/en/about/" -%}
+{%- else -%}{%- assign home = "/" -%}{%- assign about = "/a-propos/" -%}{%- endif -%}
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <a class="wordmark" href="{{ home | relative_url }}">
+      <span class="wordmark-name">{{ site.title }}</span>
+      <span class="wordmark-role">{{ site.role[page.lang] }}</span>
+    </a>
+    <nav class="nav" aria-label="{{ t.nav_log }}">
+      <a href="{{ home | relative_url }}"{% if page.url == home %} aria-current="page"{% endif %}>{{ t.nav_log }}</a>
+      <a href="{{ about | relative_url }}"{% if page.url == about %} aria-current="page"{% endif %}>{{ t.nav_about }}</a>
+      {% include lang-switch.html %}
+    </nav>
+  </div>
+</header>

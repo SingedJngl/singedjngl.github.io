@@ -1,0 +1,16 @@
+{%- comment -%}
+  Trouve la version dans l'autre langue.
+  - Pour un article : via la cle `ref` partagee entre les deux fichiers.
+  - Pour une page : via `alt_url` declare dans le front matter.
+{%- endcomment -%}
+{%- if page.lang == "fr" -%}{%- assign _other = "en" -%}{%- else -%}{%- assign _other = "fr" -%}{%- endif -%}
+{%- assign _url = page.alt_url -%}
+{%- if page.ref -%}
+  {%- assign _matches = site.posts | where: "ref", page.ref -%}
+  {%- for p in _matches -%}{%- if p.lang == _other -%}{%- assign _url = p.url -%}{%- endif -%}{%- endfor -%}
+{%- endif -%}
+{%- if _url -%}
+<a class="lang" href="{{ _url | relative_url }}" hreflang="{{ _other }}" rel="alternate">{{ site.data.i18n[_other].other_lang_label }}</a>
+{%- else -%}
+<a class="lang" href="{{ '/' | relative_url }}{% if _other == 'en' %}en/{% endif %}" hreflang="{{ _other }}" rel="alternate">{{ site.data.i18n[_other].other_lang_label }}</a>
+{%- endif -%}

@@ -1,0 +1,29 @@
+---
+layout: default
+---
+{%- assign t = site.data.i18n[page.lang] -%}
+{%- if page.lang == "en" -%}{%- assign home = "/en/" -%}{%- else -%}{%- assign home = "/" -%}{%- endif -%}
+<article class="post">
+  <div class="wrap">
+    <p class="meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{% include date.html date=page.date lang=page.lang %}</time>
+      {% if page.status %}<span class="status">{{ page.status }}</span>{% endif %}
+    </p>
+    <h1 class="post-title">{{ page.title }}</h1>
+    {% if page.excerpt_text %}<p class="standfirst">{{ page.excerpt_text }}</p>{% endif %}
+  </div>
+
+  {% if page.cover %}
+  <img class="post-cover" src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt }}" width="1200" height="675">
+  {% if page.cover_caption %}<p class="wrap caption">{{ page.cover_caption }}</p>{% endif %}
+  {% endif %}
+
+  <div class="wrap prose">
+    {{ content }}
+  </div>
+
+  <div class="wrap post-foot">
+    {% if page.stack %}<p class="stack">{% for item in page.stack %}<span>{{ item }}</span>{% endfor %}</p>{% endif %}
+    <p><a class="back" href="{{ home | relative_url }}">{{ t.back }}</a></p>
+  </div>
+</article>

@@ -1,0 +1,33 @@
+---
+layout: default
+---
+{%- assign t = site.data.i18n[page.lang] -%}
+<div class="wrap">
+  <p class="intro">{{ site.intro[page.lang] }}</p>
+  {{ content }}
+</div>
+
+{%- assign entries = site.posts | where: "lang", page.lang -%}
+{% if entries.size == 0 %}
+<div class="wrap"><p class="intro">{{ t.empty }}</p></div>
+{% endif %}
+
+<ol class="log" reversed>
+{%- for post in entries -%}
+  <li class="entry{% if forloop.first %} entry-lead{% endif %}">
+    <a class="entry-link" href="{{ post.url | relative_url }}">
+      {% if post.cover %}
+      <img class="entry-cover" src="{{ post.cover | relative_url }}" alt="" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" width="1200" height="675">
+      {% endif %}
+      <div class="wrap entry-body">
+        <p class="meta">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{% include date.html date=post.date lang=page.lang %}</time>
+          {% if post.status %}<span class="status">{{ post.status }}</span>{% endif %}
+        </p>
+        <h2 class="entry-title">{{ post.title }}</h2>
+        <p class="entry-excerpt">{{ post.excerpt_text }}</p>
+      </div>
+    </a>
+  </li>
+{%- endfor -%}
+</ol>
