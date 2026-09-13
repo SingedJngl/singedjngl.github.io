@@ -27,7 +27,7 @@ Conception, assemblage et configuration d'un drone FPV freestyle 5 pouces sous B
 
 ## Matériel utilisé
 | Composant | Référence |
-|----------|-----------|
+|-----------|-----------|
 | Châssis | MotorRiot Tanq2 |
 | Contrôleur de vol | Mamba MK4 H743 V2 |
 | ESC | Diatone 4-en-1 F55 128K |
