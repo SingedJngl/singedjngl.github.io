@@ -54,19 +54,62 @@ Liaisons principales :
 
 ## Configuration logicielle
 - Firmware : Betaflight
-- Configuration des UART
 - Système vidéo : analogique, émetteur piloté en IRC Tramp
 - Protocole ESC : DShot 600
 - Protocole radio : CRSF
 
+Côté ports série, seulement deux UART sont réellement utilisés : l'UART1 en *Serial RX*
+pour le récepteur ExpressLRS, et l'UART3 en périphérique *VTX (IRC Tramp)* pour piloter
+le canal et la puissance d'émission directement depuis l'OSD. Le reste est laissé
+désactivé, ça évite les conflits au moment du boot.
+<img src="{{ '/assets/img/bf-uart.webp' | relative_url }}" alt="Onglet Ports de Betaflight avec UART1 en Serial RX et UART3 en VTX IRC Tramp" width="700">
+
 ## Réglages
+
+### Failsafe
+C'est la première chose que j'ai configurée, avant même de faire tourner les moteurs.
+L'étape 1 remet les voies roll/pitch/yaw/throttle sur *Auto* dès que le signal devient
+invalide, et les AUX restent en *Hold*. Si la perte dure plus de 1,5 s, l'étape 2
+déclenche la procédure *Drop* : le drone coupe les moteurs et tombe sur place. Sur un
+terrain de freestyle c'est plus sûr qu'un retour maison approximatif sans GPS.
+<img src="{{ '/assets/img/bf-failsafe.webp' | relative_url }}" alt="Onglet Failsafe de Betaflight, étape 1 et étape 2 configurées" width="700">
+
+### PID
+Je suis parti des valeurs par défaut et j'ai travaillé essentiellement avec les sliders
+plutôt qu'en touchant chaque terme à la main. Le *Master Multiplier* est monté à 1.50
+pour compenser l'inertie de la machine, qui reste lourde avec ses 720 g. On retrouve
+ensuite en bas les valeurs effectives : 67/120/49 en roll, 70/126/56 en pitch, et un
+D à 0 en yaw comme il se doit.
+<img src="{{ '/assets/img/bf-pid.webp' | relative_url }}" alt="Onglet PID Tuning de Betaflight avec les sliders et les valeurs de PID" width="700">
+
+### Filtres gyro
+C'est la partie qui m'a demandé le plus d'allers-retours. Le filtre RPM est activé
+(3 harmoniques, 120 Hz mini) puisque le DShot bidirectionnel remonte les régimes moteur,
+ce qui permet de garder un filtrage assez léger ailleurs : un seul lowpass gyro en PT1
+à 650 Hz et un notch dynamique entre 150 et 350 Hz. Multiplicateurs à 1.30 sur le gyro
+et 1.10 sur le terme D — assez de marge pour éviter que les moteurs chauffent, sans
+ajouter trop de latence.
+<img src="{{ '/assets/img/bf-filter.webp' | relative_url }}" alt="Onglet Filter Settings de Betaflight, filtre RPM et notch dynamique activés" width="700">
+
+### Rates
+Rates en *Actual*, qui a l'avantage d'être lisible directement en degrés par seconde :
+180 °/s de sensibilité au centre, 670 °/s en butée et 0,60 d'expo sur les trois axes.
+Ça reste doux autour du neutre pour les lignes droites tout en laissant de quoi
+enchaîner les flips.
+C'est grâce au simulateur "The Zone" et au tuto de son développeur sur les rates que j'ai pû trouver les rates parfait pour mon pilotage
+<img src="{{ '/assets/img/bf-rates.webp' | relative_url }}" alt="Onglet Rate Profile Settings de Betaflight avec des rates Actual" width="700">
+
+### OSD
+L'OSD est volontairement minimaliste : tension de la batterie, tension moyenne par
+cellule, consommation en mAh, altitude, chronomètre de vol et l'alerte *LOW VOLTAGE*.
+Unités en métrique, alarme capacité à 1300 mAh. En vol on n'a pas le temps de lire
+quinze informations, donc tout ce qui n'est pas utile pour savoir quand rentrer a été
+décoché.
+<img src="{{ '/assets/img/bf-osd.webp' | relative_url }}" alt="Onglet OSD de Betaflight avec l'aperçu des éléments affichés" width="700">
+
+### Divers
 - Modes de vol : ACRO
-- Failsafe étapes 1 et 2 configurées
-- Réglage des PID
-- Filtres gyro
-- Rates
-- OSD
-- Blackbox
+- Blackbox activée pour relire les logs après les sessions de réglage
 
 ## Tests réalisés
 - Test de continuité électrique
@@ -75,10 +118,6 @@ Liaisons principales :
 - Premier vol stationnaire
 - Tests de stabilité
 - Ajustement des filtres et des PID
-
-## Problèmes rencontrés
-- Bruit sur le retour vidéo lors d'accélération
-- Solutions mises en œuvre : simplement souder un condensateur sur l'ESC près de la batterie
 
 ## Résultats
 - Masse finale : 720g
