@@ -5,16 +5,17 @@ ref: fpv-5in
 lang: fr
 permalink: /journal/drone-fpv-5-pouces/
 cover: /assets/img/buil_fpv_final.png
-cover_alt: "Le drone FPV 5 pouces terminé, posé sur un établi"
-cover_caption: "Remplacer par une photo du drone terminé."
-excerpt_text: "Un 5 pouces de course monté pièce par pièce, en vidéo analogique. Le montage n'est pas la partie difficile : le réglage et la propreté du câblage, si."
+cover_alt: "Le drone FPV 5 pouces terminé"
+cover_caption: "Le drone FPV 5 pouces terminé"
+excerpt_text: "Conception, assemblage et configuration d'un drone FPV freestyle 5 pouces sous Betaflight."
 stack: ["Betaflight", "ESC 4-en-1", "Vidéo analogique"]
 ---
 
-Ce drone est un cinq pouces de course classique, monté pièce par pièce, en
+Ce drone est un cinq pouces de freestyle en "bando", monté pièce par pièce, en
 transmission vidéo analogique. J'aurais pu partir sur du numérique, mais l'analogique
 reste moins cher, plus tolérant quand le signal se dégrade, et suffisant pour
 apprendre.
+
 ## Vue d'ensemble
 Conception, assemblage et configuration d'un drone FPV freestyle 5 pouces sous Betaflight.
 
