@@ -15,44 +15,76 @@ Ce drone est un cinq pouces de course classique, monté pièce par pièce, en
 transmission vidéo analogique. J'aurais pu partir sur du numérique, mais l'analogique
 reste moins cher, plus tolérant quand le signal se dégrade, et suffisant pour
 apprendre.
+## Vue d'ensemble
+Conception, assemblage et configuration d'un drone FPV freestyle 5 pouces sous Betaflight.
 
-## Le montage
+## Objectifs
+- Construire un drone FPV fiable et facile à entretenir
+- Optimiser la stabilité en vol
+- Configurer le contrôleur de vol, l'ESC, le récepteur radio et le VTX
+- Comprendre le réglage des PID et du filtrage
 
-<!-- TODO : lister précisément châssis / moteurs / ESC / FC / VTX / caméra -->
+## Matériel utilisé
+| Composant | Référence |
+|----------|-----------|
+| Châssis | MotorRiot Tanq2 |
+| Contrôleur de vol | Mamba MK4 H743 V2 |
+| ESC | Diatone 4-en-1 F55 128K |
+| Moteurs | Velox V2207 V2 1750KV |
+| Caméra FPV | Foxeer T-Rex mini |
+| Émetteur vidéo (VTX) | SpeedyBee TX800 |
+| Récepteur radio | RadioMaster Nano ELRS RP1 2,4 GHz V2 |
+| Batterie | LiPo Tattu 6S 1300 mAh |
+| Buzzer | Vifly Finder 2 (buzzer autonome) |
 
-Rien de spectaculaire côté assemblage. Les deux choses qui font vraiment la
-différence sur la durée :
+## Architecture du système
+Le drone est construit autour d'un contrôleur de vol H7 relié à un ESC 4-en-1, quatre moteurs brushless, un récepteur ExpressLRS, une caméra FPV et un émetteur vidéo analogique.
 
-- **La soudure.** Des soudures propres sur l'ESC et les moteurs, c'est ce qui évite
-  les pannes intermittentes, celles qu'on ne reproduit jamais au sol.
-- **Le cheminement des câbles.** Un fil qui traverse le châssis au mauvais endroit
-  finit dans une hélice, ou bien injecte du bruit dans la ligne vidéo.
+Le schéma de câblage ci-dessous résume les principales liaisons électriques et de signal.
+<img src="images/diatone-mamba-h7-fc-flight-controller-manual-instructions-wiring.webp" alt="Schéma de câblage du drone FPV" width="700">
 
-Cette deuxième leçon, je l'ai apprise en poursuivant pendant un moment des barres
-parasites dans l'image, qui venaient simplement d'un câble d'alimentation passé trop
-près du VTX.
+Liaisons principales :
+- La batterie LiPo alimente directement l'ESC 4-en-1.
+- L'ESC alimente le contrôleur de vol et communique avec lui.
+- Les moteurs sont pilotés par l'ESC via le protocole DShot.
+- Le récepteur ExpressLRS communique avec le contrôleur de vol en CRSF sur UART.
+- La caméra FPV est reliée au contrôleur de vol pour l'incrustation de l'OSD.
+- Le VTX reçoit la sortie vidéo du contrôleur de vol et se configure en IRC Tramp sur UART.
 
-## Le réglage sous Betaflight
+## Configuration logicielle
+- Firmware : Betaflight
+- Configuration des UART
+- Système vidéo : analogique, émetteur piloté en IRC Tramp
+- Protocole ESC : DShot 600
+- Protocole radio : CRSF
 
-C'est là que passe l'essentiel du temps. Le point de départ est toujours le même :
-vérifier le sens de rotation des moteurs et le mapping des voies avant de toucher à
-quoi que ce soit d'autre — un sens inversé se voit mal au sol et très bien au
-décollage.
+## Réglages
+- Modes de vol : ACRO
+- Failsafe étapes 1 et 2 configurées
+- Réglage des PID
+- Filtres gyro
+- Rates
+- OSD
+- Blackbox
 
-Ensuite, dans l'ordre :
+## Tests réalisés
+- Test de continuité électrique
+- Vérification du sens de rotation des moteurs
+- Test du failsafe
+- Premier vol stationnaire
+- Tests de stabilité
+- Ajustement des filtres et des PID
 
-1. **Filtrage.** Identifier les fréquences de vibration propres à la cellule, et
-   filtrer juste ce qu'il faut. Trop peu, les moteurs chauffent ; trop, la réponse
-   devient molle.
-2. **PID.** Le réglage d'attitude proprement dit. On sent immédiatement le résultat,
-   ce qui est très satisfaisant après des heures de filtrage.
-3. **Rates.** La sensibilité des commandes, purement une affaire de goût de pilotage.
+## Problèmes rencontrés
+- Bruit vidéo
+- Solutions mises en œuvre
 
-<!-- TODO : ajouter une capture Blackbox avant/après filtrage, c'est ce qui parle le mieux -->
+## Résultats
+- Masse finale :
+- Autonomie en vol :
+- Comportement en vol :
+- Améliorations futures :
 
-## Ce que j'en retiens
+## Médias
+Ajouter ici les photos, schémas de câblage ou vidéos.
 
-Ce projet n'a rien inventé — les composants existent, le firmware existe. Ce qu'il
-m'a apporté, c'est une intuition physique sur une boucle de régulation : comprendre
-ce que « ça oscille » veut dire quand on le sent dans les manches, avant même de
-regarder les courbes. Ça m'a nettement servi ensuite sur [DroneLoad](/journal/droneload/).
