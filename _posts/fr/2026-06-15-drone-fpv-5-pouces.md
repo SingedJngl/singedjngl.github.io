@@ -4,7 +4,7 @@ title: "Monter et régler un FPV 5 pouces en analogique"
 ref: fpv-5in
 lang: fr
 permalink: /journal/drone-fpv-5-pouces/
-cover: /assets/img/fpv.svg
+cover: /assets/img/buil_fpv_final.png
 cover_alt: "Le drone FPV 5 pouces terminé, posé sur un établi"
 cover_caption: "Remplacer par une photo du drone terminé."
 excerpt_text: "Un 5 pouces de course monté pièce par pièce, en vidéo analogique. Le montage n'est pas la partie difficile : le réglage et la propreté du câblage, si."
