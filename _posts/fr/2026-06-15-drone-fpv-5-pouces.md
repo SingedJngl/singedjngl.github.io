@@ -4,7 +4,7 @@ title: "Monter et régler un FPV 5 pouces en analogique"
 ref: fpv-5in
 lang: fr
 permalink: /journal/drone-fpv-5-pouces/
-cover: /assets/img/buil_fpv_final.png
+cover: /assets/img/build_fpv_final.png
 cover_alt: "Le drone FPV 5 pouces terminé"
 cover_caption: "Le drone FPV 5 pouces terminé"
 excerpt_text: "Conception, assemblage et configuration d'un drone FPV freestyle 5 pouces sous Betaflight."
@@ -42,7 +42,7 @@ Conception, assemblage et configuration d'un drone FPV freestyle 5 pouces sous B
 Le drone est construit autour d'un contrôleur de vol H7 relié à un ESC 4-en-1, quatre moteurs brushless, un récepteur ExpressLRS, une caméra FPV et un émetteur vidéo analogique.
 
 Le schéma de câblage ci-dessous résume les principales liaisons électriques et de signal.
-<img src="assets/img/diatone-mamba-h7-fc-flight-controller-manual-instructions-wiring.webp" alt="Schéma de câblage du drone FPV" width="700">
+<img src="{{ '/assets/img/diatone-mamba-h7-fc-flight-controller-manual-instructions-wiring.webp' | relative_url }}" alt="Schéma de câblage du drone FPV" width="700">
 
 Liaisons principales :
 - La batterie LiPo alimente directement l'ESC 4-en-1.
