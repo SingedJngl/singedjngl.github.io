@@ -41,7 +41,7 @@ Conception, assemblage et configuration d'un drone FPV freestyle 5 pouces sous B
 Le drone est construit autour d'un contrôleur de vol H7 relié à un ESC 4-en-1, quatre moteurs brushless, un récepteur ExpressLRS, une caméra FPV et un émetteur vidéo analogique.
 
 Le schéma de câblage ci-dessous résume les principales liaisons électriques et de signal.
-<img src="images/diatone-mamba-h7-fc-flight-controller-manual-instructions-wiring.webp" alt="Schéma de câblage du drone FPV" width="700">
+<img src="assets/img/diatone-mamba-h7-fc-flight-controller-manual-instructions-wiring.webp" alt="Schéma de câblage du drone FPV" width="700">
 
 Liaisons principales :
 - La batterie LiPo alimente directement l'ESC 4-en-1.
