@@ -1,0 +1,5 @@
+- name: DroneLoad
+  slug: droneload
+  url: /projects/droneload/
+  description: "Compétition de drone autonome — journal de bord"
+  cover: /assets/img/droneload/cover.jpg
