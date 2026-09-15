@@ -8,16 +8,51 @@ layout: default
 </div>
 
 {%- assign entries = site.posts | where: "lang", page.lang -%}
-{% if entries.size == 0 %}
+
+{%- comment -%} Séparer les posts dossier des posts normaux {%- endcomment -%}
+{%- assign normal_entries = "" | split: "" -%}
+{%- for post in entries -%}
+  {%- assign is_folder = false -%}
+  {%- for cat in site.folder_categories -%}
+    {%- if post.categories contains cat -%}
+      {%- assign is_folder = true -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- unless is_folder -%}
+    {%- assign normal_entries = normal_entries | push: post -%}
+  {%- endunless -%}
+{%- endfor -%}
+
+{% if normal_entries.size == 0 and site.data.folders.size == 0 %}
 <div class="wrap"><p class="intro">{{ t.empty }}</p></div>
 {% endif %}
 
 <ol class="log" reversed>
-{%- for post in entries -%}
+
+{%- comment -%} Cartes dossier (DroneLoad) {%- endcomment -%}
+{%- for folder in site.data.folders -%}
+  {%- assign folder_count = entries | where_exp: "p", "p.categories contains folder.slug" | size -%}
   <li class="entry{% if forloop.first %} entry-lead{% endif %}">
+    <a class="entry-link" href="{{ folder.url | relative_url }}">
+      {% if folder.cover %}
+      <img class="entry-cover" src="{{ folder.cover | relative_url }}" alt="" loading="eager" width="1200" height="675">
+      {% endif %}
+      <div class="wrap entry-body">
+        <p class="meta">📂 {{ folder_count }} entrée{% if folder_count > 1 %}s{% endif %}</p>
+        <h2 class="entry-title">{{ folder.name }}</h2>
+        <p class="entry-excerpt">{{ folder.description }}</p>
+      </div>
+    </a>
+  </li>
+{%- endfor -%}
+
+{%- comment -%} Articles individuels (hors dossiers) {%- endcomment -%}
+{%- for post in normal_entries -%}
+  <li class="entry">
     <a class="entry-link" href="{{ post.url | relative_url }}">
       {% if post.cover %}
-      <img class="entry-cover" src="{{ post.cover | relative_url }}" alt="" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" width="1200" height="675">
+      <img class="entry-cover" src="{{ post.cover | relative_url }}" alt="" loading="lazy" width="1200" height="675">
       {% endif %}
       <div class="wrap entry-body">
         <p class="meta">
@@ -30,4 +65,5 @@ layout: default
     </a>
   </li>
 {%- endfor -%}
+
 </ol>
