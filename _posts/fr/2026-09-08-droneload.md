@@ -2,6 +2,7 @@
 layout: post
 title: "DroneLoad : mener un projet de drone autonome à cinq"
 ref: droneload
+categories: [droneload]
 lang: fr
 permalink: /journal/droneload/
 status: "En cours"
