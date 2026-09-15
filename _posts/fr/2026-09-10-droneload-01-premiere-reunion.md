@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "DroneLoad #01 — Poser le cadre"
-date: 2026-09-14
+date: 2026-09-10
 lang: fr
 ref: droneload-01
 categories: [droneload]
