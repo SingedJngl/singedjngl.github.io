@@ -1,6 +1,52 @@
 ---
-layout: home
-lang: fr
-alt_url: /en/
-permalink: /
+layout: default
+title: Projets
 ---
+
+<section class="home">
+
+  <div class="card-grid">
+
+    {% for folder in site.data.folders %}
+      {% assign entry_count = site.posts | where_exp: "p", "p.categories contains folder.slug" | size %}
+      <a href="{{ folder.url | relative_url }}" class="card card--folder">
+        {% if folder.cover %}
+        <img src="{{ folder.cover | relative_url }}" alt="" class="card-img">
+        {% else %}
+        <div class="card-img card-img--placeholder"></div>
+        {% endif %}
+        <div class="card-body">
+          <span class="card-date">{{ entry_count }} entrée{% if entry_count > 1 %}s{% endif %}</span>
+          <h2 class="card-title">{{ folder.name }}</h2>
+          <p class="card-excerpt">{{ folder.description }}</p>
+        </div>
+      </a>
+    {% endfor %}
+
+    {% for post in site.posts %}
+      {% assign is_folder = false %}
+      {% for cat in site.folder_categories %}
+        {% if post.categories contains cat %}
+          {% assign is_folder = true %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+      {% unless is_folder %}
+      <a href="{{ post.url | relative_url }}" class="card">
+        {% if post.image %}
+        <img src="{{ post.image | relative_url }}" alt="" class="card-img">
+        {% else %}
+        <div class="card-img card-img--placeholder"></div>
+        {% endif %}
+        <div class="card-body">
+          <span class="card-date">{{ post.date | date: "%e %b %Y" }}</span>
+          <h2 class="card-title">{{ post.title }}</h2>
+          <p class="card-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+        </div>
+      </a>
+      {% endunless %}
+    {% endfor %}
+
+  </div>
+
+</section>
