@@ -11,9 +11,8 @@ layout: default
 
 <ol class="log" reversed>
 
-{%- comment -%} Carte dossier DroneLoad {%- endcomment -%}
-{%- for folder in site.data.folders -%}
-  {%- assign folder_count = entries | where_exp: "p", "p.categories contains folder.slug" | size -%}
+{% for folder in site.data.folders %}
+  {% assign folder_count = entries | where_exp: "p", "p.categories contains folder.slug" | size %}
   <li class="entry entry-lead">
     <a class="entry-link" href="{{ folder.url | relative_url }}">
       {% if folder.cover %}
@@ -26,18 +25,16 @@ layout: default
       </div>
     </a>
   </li>
-{%- endfor -%}
+{% endfor %}
 
-{%- comment -%} Articles individuels (hors dossiers) {%- endcomment -%}
-{%- for post in entries -%}
-  {%- assign is_folder = false -%}
-  {%- for cat in site.folder_categories -%}
-    {%- if post.categories contains cat -%}
-      {%- assign is_folder = true -%}
-      {%- break -%}
-    {%- endif -%}
-  {%- endfor -%}
-  {%- unless is_folder -%}
+{% for post in entries %}
+  {% assign show = true %}
+  {% for cat in site.folder_categories %}
+    {% if post.categories contains cat %}
+      {% assign show = false %}
+    {% endif %}
+  {% endfor %}
+  {% if show %}
   <li class="entry">
     <a class="entry-link" href="{{ post.url | relative_url }}">
       {% if post.cover %}
@@ -49,3 +46,11 @@ layout: default
           {% if post.status %}<span class="status">{{ post.status }}</span>{% endif %}
         </p>
         <h2 class="entry-title">{{ post.title }}</h2>
+        <p class="entry-excerpt">{{ post.excerpt_text }}</p>
+      </div>
+    </a>
+  </li>
+  {% endif %}
+{% endfor %}
+
+</ol>
