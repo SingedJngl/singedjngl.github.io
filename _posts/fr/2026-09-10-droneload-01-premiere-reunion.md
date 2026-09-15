@@ -6,8 +6,10 @@ lang: fr
 ref: droneload-01
 categories: [droneload]
 tags: [droneload, ardupilot, gestion-de-projet, journal-de-bord]
-image: /assets/img/droneload/01-cover.jpg
-excerpt: "Première semaine comme chef de projet : découpage en pôles, répartition de l'équipe, mise en place des outils."
+permalink: /journal/droneload-01-premiere-reunion/
+cover: /assets/img/droneload.svg
+cover_alt: "Le tableau de découpage des pôles lors de la première réunion"
+excerpt_text: "Première semaine comme chef de projet : découpage en pôles, répartition de l'équipe, mise en place des outils."
 ---
 
 ## Le contexte
