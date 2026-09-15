@@ -9,31 +9,12 @@ layout: default
 
 {%- assign entries = site.posts | where: "lang", page.lang -%}
 
-{%- comment -%} Séparer les posts dossier des posts normaux {%- endcomment -%}
-{%- assign normal_entries = "" | split: "" -%}
-{%- for post in entries -%}
-  {%- assign is_folder = false -%}
-  {%- for cat in site.folder_categories -%}
-    {%- if post.categories contains cat -%}
-      {%- assign is_folder = true -%}
-      {%- break -%}
-    {%- endif -%}
-  {%- endfor -%}
-  {%- unless is_folder -%}
-    {%- assign normal_entries = normal_entries | push: post -%}
-  {%- endunless -%}
-{%- endfor -%}
-
-{% if normal_entries.size == 0 and site.data.folders.size == 0 %}
-<div class="wrap"><p class="intro">{{ t.empty }}</p></div>
-{% endif %}
-
 <ol class="log" reversed>
 
-{%- comment -%} Cartes dossier (DroneLoad) {%- endcomment -%}
+{%- comment -%} Carte dossier DroneLoad {%- endcomment -%}
 {%- for folder in site.data.folders -%}
   {%- assign folder_count = entries | where_exp: "p", "p.categories contains folder.slug" | size -%}
-  <li class="entry{% if forloop.first %} entry-lead{% endif %}">
+  <li class="entry entry-lead">
     <a class="entry-link" href="{{ folder.url | relative_url }}">
       {% if folder.cover %}
       <img class="entry-cover" src="{{ folder.cover | relative_url }}" alt="" loading="eager" width="1200" height="675">
@@ -48,7 +29,15 @@ layout: default
 {%- endfor -%}
 
 {%- comment -%} Articles individuels (hors dossiers) {%- endcomment -%}
-{%- for post in normal_entries -%}
+{%- for post in entries -%}
+  {%- assign is_folder = false -%}
+  {%- for cat in site.folder_categories -%}
+    {%- if post.categories contains cat -%}
+      {%- assign is_folder = true -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- unless is_folder -%}
   <li class="entry">
     <a class="entry-link" href="{{ post.url | relative_url }}">
       {% if post.cover %}
@@ -60,10 +49,3 @@ layout: default
           {% if post.status %}<span class="status">{{ post.status }}</span>{% endif %}
         </p>
         <h2 class="entry-title">{{ post.title }}</h2>
-        <p class="entry-excerpt">{{ post.excerpt_text }}</p>
-      </div>
-    </a>
-  </li>
-{%- endfor -%}
-
-</ol>
