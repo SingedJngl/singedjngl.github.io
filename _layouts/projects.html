@@ -1,0 +1,47 @@
+---
+layout: default
+---
+{%- assign t = site.data.i18n[page.lang] -%}
+{%- if page.lang == "en" -%}{%- assign home = "/en/" -%}{%- else -%}{%- assign home = "/" -%}{%- endif -%}
+{%- assign episodes = site.posts | where: "lang", page.lang | where_exp: "p", "p.categories contains page.category" | sort: "date" -%}
+
+<article class="project">
+  <div class="wrap">
+    <h1 class="post-title">{{ page.title }}</h1>
+    {% if page.description %}<p class="standfirst">{{ page.description }}</p>{% endif %}
+  </div>
+
+  {% if page.cover %}
+  <img class="post-cover" src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt }}" width="1200" height="675">
+  {% if page.cover_caption %}<p class="wrap caption">{{ page.cover_caption }}</p>{% endif %}
+  {% endif %}
+
+  <div class="wrap prose">
+    {{ content }}
+  </div>
+
+  <ol class="log">
+  {% for post in episodes %}
+    <li class="entry">
+      <a class="entry-link" href="{{ post.url | relative_url }}">
+        {% if post.cover %}
+        <img class="entry-cover" src="{{ post.cover | relative_url }}" alt="" loading="lazy" width="1200" height="675">
+        {% endif %}
+        <div class="wrap entry-body">
+          <p class="meta">
+            <time datetime="{{ post.date | date_to_xmlschema }}">{% include date.html date=post.date lang=page.lang %}</time>
+            {% if post.status %}<span class="status">{{ post.status }}</span>{% endif %}
+          </p>
+          <h2 class="entry-title">{{ post.title }}</h2>
+          <p class="entry-excerpt">{{ post.excerpt_text }}</p>
+        </div>
+      </a>
+    </li>
+  {% endfor %}
+  </ol>
+
+  <div class="wrap post-foot">
+    {% if page.stack %}<p class="stack">{% for item in page.stack %}<span>{{ item }}</span>{% endfor %}</p>{% endif %}
+    <p><a class="back" href="{{ home | relative_url }}">{{ t.back | default: "Retour" }}</a></p>
+  </div>
+</article>
