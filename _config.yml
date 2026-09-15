@@ -21,6 +21,9 @@ kramdown:
 permalink: /:year/:title/
 timezone: Europe/Paris
 
+folder_categories:
+  - droneload
+
 defaults:
   - scope: { path: "_posts/fr", type: "posts" }
     values: { layout: "post", lang: "fr" }
