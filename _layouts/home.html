@@ -12,16 +12,17 @@ layout: default
 <ol class="log" reversed>
 
 {% for folder in site.data.folders %}
+  {% assign f = folder[page.lang] %}
   {% assign folder_count = entries | where_exp: "p", "p.categories contains folder.slug" | size %}
   <li class="entry entry-lead">
-    <a class="entry-link" href="{{ folder.url | relative_url }}">
+    <a class="entry-link" href="{{ f.url | relative_url }}">
       {% if folder.cover %}
       <img class="entry-cover" src="{{ folder.cover | relative_url }}" alt="" loading="eager" width="1200" height="675">
       {% endif %}
       <div class="wrap entry-body">
-        <p class="meta">{{ folder_count }} entrée{% if folder_count > 1 %}s{% endif %}</p>
-        <h2 class="entry-title">{{ folder.name }}</h2>
-        <p class="entry-excerpt">{{ folder.description }}</p>
+        <p class="meta">{% if folder_count == 0 %}{{ t.entry_zero }}{% elsif folder_count == 1 %}{{ folder_count }} {{ t.entry_one }}{% else %}{{ folder_count }} {{ t.entry_other }}{% endif %}</p>
+        <h2 class="entry-title">{{ f.name }}</h2>
+        <p class="entry-excerpt">{{ f.description }}</p>
       </div>
     </a>
   </li>

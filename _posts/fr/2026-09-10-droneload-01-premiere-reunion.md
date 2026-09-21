@@ -14,62 +14,62 @@ excerpt_text: "Première semaine comme chef de projet : découpage en pôles, r�
 
 ## Le contexte
 
-DroneLoad, c'est notre projet de 4<sup>e</sup> année à l'ECE : une compétition étudiante de drone autonome. Le drone doit voler seul sur un parcours imposé, transporter une charge utile et détecter des cibles au sol. On est cinq sur le projet, et j'en suis le chef de projet.
+DroneLoad est notre projet de 4<sup>e</sup> année à l'ECE, une compétition étudiante de drone autonome. Le drone doit voler seul sur un parcours imposé, transporter une charge utile et détecter des cibles au sol. On est cinq sur le projet et j'en suis le chef.
 
-Je démarre ce journal pour deux raisons. La première, c'est que je veux garder une trace de ce qu'on fait semaine après semaine — pas la version propre et reconstruite qu'on met dans un rapport final, mais ce qui s'est vraiment passé, y compris ce qui coince. La deuxième, c'est que c'est la première fois que je dirige une équipe. Je vais forcément me tromper plusieurs fois ; autant l'écrire au moment où ça arrive plutôt que de le romancer après coup.
+Je démarre ce journal pour garder une trace de ce qu'on fait semaine après semaine. Un rapport final reconstruit tout après coup et lisse les erreurs ; je veux la version qui s'est vraiment passée, y compris ce qui coince. C'est aussi la première fois que je dirige une équipe. Je vais me tromper plusieurs fois, autant l'écrire au moment où ça arrive.
 
 ## Découper le projet
 
-Première réunion d'équipe cette semaine. Mon objectif était simple : ne pas sortir de la salle sans que chacun sache sur quoi il bosse.
+J'ai réuni l'équipe cette semaine. Objectif : personne ne sort de la salle sans savoir sur quoi il travaille.
 
-J'ai commencé par découper le projet en pôles. Une fois qu'on avait listé au tableau tout ce que le drone doit savoir faire, le découpage est venu assez naturellement :
+On a d'abord listé au tableau tout ce que le drone doit savoir faire. Le découpage en quatre pôles est venu de cette liste, chaque pôle correspondant à un ensemble qu'une personne peut porter seule :
 
-- **P1 — Mécanique, propulsion, largage** : concevoir la structure du drone, dimensionner la chaîne propulsive, réaliser le mécanisme de largage de la charge utile, tenir le budget de masse. CAO, impression 3D, eCalc, atelier.
-- **P2 — Avionique bas niveau** : faire voler le drone de façon stable et sûre. Contrôleur de vol (Pixhawk / ArduPilot), calibrations, boucles d'asservissement PID, liaison MAVLink avec l'ordinateur compagnon.
+- **P1 — Mécanique, propulsion, largage** : concevoir la structure, dimensionner la chaîne propulsive, réaliser le mécanisme de largage, tenir le budget de masse. CAO, impression 3D, eCalc, atelier.
+- **P2 — Avionique bas niveau** : faire voler le drone de façon stable et sûre. Contrôleur de vol Pixhawk 6 sous ArduPilot, calibrations, boucles PID, liaison MAVLink avec l'ordinateur compagnon.
 - **P3 — Vision artificielle** : détecter la cible au sol depuis le drone et fournir à la navigation l'écart latéral en mètres. Python, OpenCV, marqueurs ArUco ou YOLO léger, optimisation sur Raspberry Pi ou Jetson.
-- **P4 — Navigation sans GPS & ROS 2** : tenir la position sans GPS et piloter la mission. Fusion de capteurs (optical flow + LiDAR + EKF), architecture logicielle ROS 2, machine à états de la mission, simulation SITL + Gazebo.
+- **P4 — Navigation sans GPS et ROS 2** : tenir la position sans GPS et piloter la mission. Fusion optical flow, LiDAR et EKF, architecture logicielle ROS 2, machine à états de la mission, simulation SITL et Gazebo.
 
-Pour la répartition, j'ai fait un choix assumé : plutôt que d'attribuer les pôles moi-même sur des critères que je n'ai pas encore, j'ai demandé à chacun sur quoi il avait envie de travailler et j'ai réparti selon les préférences. L'avantage, c'est que tout le monde démarre motivé. L'inconvénient, c'est que la motivation ne garantit pas la compétence, et je ne le verrai qu'au bout de quelques semaines. Je préfère ce risque-là à celui de coller quelqu'un sur un pôle qui ne l'intéresse pas pendant six mois.
+Ces pôles ne sont pas indépendants. La masse que retient P1 contraint le largage, et le budget d'énergie contraint tout le monde. On tiendra donc un tableau commun de masse, de courant consommé et d'encombrement, mis à jour à chaque décision, sinon chaque pôle avance sur des hypothèses que les autres ignorent.
 
-Résultat : on suis est à deux sur P1 et je suis seul sur P2, en plus de la coordination. Dit comme ça, ça fait beaucoup, mais en pratique P2 est ma zone de confort; Pixhawk, ArduPilot, boucles PID, c'est ce que je fais depuis un moment avec mes projets perso, et je pense pouvoir boucler le gros du travail assez vite. Le vrai engagement long terme, c'est P1 : la mécanique et la propulsion vont évoluer jusqu'au bout du projet, au fil des essais en vol et des itérations sur le châssis et le largueur. Les trois autres se partagent P3 et P4.
+Pour la répartition, j'ai demandé à chacun sur quoi il voulait travailler et j'ai suivi les préférences. Je n'ai pas encore les critères pour juger du niveau de chacun, donc attribuer les pôles moi-même reviendrait à tirer au sort. Tout le monde démarre motivé. En contrepartie, la motivation ne garantit pas la compétence, et je ne le verrai qu'au bout de quelques semaines. Ce risque me paraît plus faible que celui de coller quelqu'un six mois sur un pôle qui ne l'intéresse pas.
+
+On est deux sur P1, je suis seul sur P2, et j'ajoute la coordination par-dessus. P2 est ma zone de confort : Pixhawk, ArduPilot et boucles PID, c'est ce que je fais sur mes projets personnels depuis un moment, donc je peux en boucler le gros rapidement. P1 est l'engagement long : la mécanique et la propulsion vont bouger jusqu'au bout, au fil des essais en vol et des itérations sur le châssis et le largueur. Les trois autres se partagent P3 et P4.
 
 ## Ma place dans l'équipe
 
-Un truc que j'ai essayé de tenir dès la première réunion : rester à la même hauteur que les autres. Je suis chef de projet, mais je reste un étudiant de 4A comme eux, avec un pôle technique à assumer. Je n'ai pas envie du mode « je distribue les tâches et je supervise ».
+Je reste un étudiant de 4A comme eux, avec un pôle technique à tenir. Je ne veux pas du mode « je distribue les tâches et je supervise ».
 
-Concrètement, ça veut dire que les décisions se discutent avant d'être prises, et qu'une fois prises, on avance sans les rouvrir. Est-ce que c'est le bon dosage ? Je n'en sais rien. Le risque que je vois déjà, c'est de ne pas arriver à imposer une décision impopulaire le jour où il faudra le faire.
+Concrètement, les décisions se discutent avant d'être prises, et une fois prises on avance sans les rouvrir. Sinon on repasse indéfiniment sur les mêmes sujets et plus rien n'avance. Je ne sais pas si le dosage est bon. Le risque que je vois déjà, c'est de ne pas réussir à imposer une décision impopulaire le jour où il faudra.
 
 ## L'intendance
 
-Simple :
+Deux outils, en place dès cette semaine :
 
-- un **Drive partagé** pour tout ce qui n'est pas du code : documents, CAO, comptes rendus de réunion, règlement du concours, photos ;
-- un **dépôt GitHub** pour l'ensemble du code, avec une organisation par pôle.
+- un Drive partagé pour tout ce qui n'est pas du code : documents, CAO, comptes rendus de réunion, règlement du concours, photos ;
+- un dépôt GitHub pour le code, organisé par pôle.
 
-Si ce n'est pas en place dès la semaine 1, ça ne le sera jamais.
+Si ce n'est pas posé en semaine 1, ça ne le sera jamais : chacun prend ses habitudes de son côté et on passe le reste du projet à chercher les fichiers.
 
 ## Prise de contact
 
-J'ai aussi écrit au responsable du projet côté école et au responsable du concours. Deux questions principales : **quel matériel est déjà disponible ou fourni**, et **quelles sont les dates réelles** — jalons intermédiaires, date de la compétition. Ça paraît trivial, mais tant que je n'ai pas ces deux réponses, je ne peux ni construire un planning, ni chiffrer un budget, ni savoir si on part d'une base existante ou d'une feuille blanche.
+J'ai écrit au responsable du projet côté école et au responsable du concours. Deux questions : quel matériel est déjà disponible ou fourni, et quelles sont les dates réelles, jalons intermédiaires et date de compétition. Tant que je n'ai pas ces deux réponses, je ne peux ni construire un planning, ni chiffrer un budget, ni savoir si on part d'une base existante ou d'une feuille blanche.
 
-Côté matos, bonne nouvelle, on récupère l'électronique du projet DroneLoad d'il y a deux ans càd le contrôleur de vol, l'ESC et quatre moteurs. On ne part donc pas de zéro sur la partie avionique, ce qui me décharge un peu sur P2. Il faudra quand même tout vérifier, recalibrer et s'assurer que tout reste fonctionnel après être resté dans un placard pendant deux ans, mais c'est toujours ça de gagné sur le budget et le délai.
+Côté matériel, on récupère l'électronique du DroneLoad d'il y a deux ans : un contrôleur de vol Pixhawk 6, un module d'alimentation Holybro PM03D v1.1, quatre ESC T-Motor 20 A et quatre moteurs T-Motor 1000KV. Ça décharge une partie de P2 et ça allège le budget. Il faudra quand même tout vérifier et recalibrer après deux ans de placard, avant de considérer la base comme saine.
 
-Pour les dates et le règlement détaillé, le concours nous communiquera les premières informations le 19 septembre. D'ici là, le planning reste en suspens.
+Cette base vient d'un autre projet, elle n'a pas été dimensionnée pour notre mission. Le courant admissible des ESC et le KV des moteurs contraignent le couple hélice/tension qu'on pourra utiliser, donc P1 doit valider la chaîne propulsive avec la masse en charge visée avant de dessiner quoi que ce soit. Si ça ne passe pas, c'est toute la propulsion qui repart en achat et le budget avec.
+
+Le concours communiquera ses premières informations le 19 septembre. Le planning reste en suspens jusque-là.
 
 ## Ce qui m'inquiète
 
-Pour être honnête, je termine la semaine avec plus de questions que de réponses :
-
-- Je ne connais pas encore le niveau technique réel de mes équipiers. Sur le papier tout le monde est partant ; je ne saurai ce que ça donne qu'au premier vrai livrable.
+- Je ne connais pas le niveau technique réel de mes équipiers. Sur le papier tout le monde est partant, je le saurai au premier vrai livrable.
 - Le planning reste vide tant que je n'ai pas les dates du concours.
-- On a récupéré la base électronique, mais je ne sais pas encore dans quel état elle est ni ce qu'il manque autour — donc toujours pas de budget.
-- Et surtout; je n'ai jamais dirigé une équipe. Je n'ai aucune idée de ce que je fais mal en ce moment même.
-
-La semaine 1 ne sert pas à avoir des réponses, elle sert à poser un cadre dans lequel les réponses pourront arriver. L'équipe existe, les pôles existent, les outils existent, les bonnes questions sont posées aux bonnes personnes. C'est déjà ça.
+- Je connais les références de l'électronique récupérée, pas son état ni ce qu'il manque autour. Le budget attend ça.
+- Je n'ai jamais dirigé une équipe. Je ne sais pas ce que je fais mal en ce moment même.
 
 ## Objectifs de la semaine 2
 
-- Réceptionner et inspecter le matériel récupéré (FC, ESC, moteurs) — vérifier l'état et la compatibilité.
-- Récupérer les premières infos du concours le 19 septembre et en tirer un rétroplanning.
-- Rédiger avec chaque pôle une courte fiche : objectif, livrables attendus, premières échéances.
-- Commencer à choisir l'architecture générale du drone (base de châssis, capteurs, ordinateur compagnon).
+- Réceptionner et inspecter le matériel récupéré : état des quatre moteurs et des quatre ESC, compatibilité du PM03D avec le Pixhawk 6.
+- Récupérer les informations du concours le 19 septembre et en tirer un rétroplanning.
+- Rédiger avec chaque pôle une fiche courte : objectif, livrables, premières échéances.
+- Choisir l'architecture générale du drone : base de châssis, capteurs, ordinateur compagnon.
