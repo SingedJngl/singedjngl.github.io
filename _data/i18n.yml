@@ -12,6 +12,14 @@ fr:
     - octobre
     - novembre
     - décembre
+  nav_log: "Journal"
+  nav_about: "À propos"
+  back: "← Retour au journal"
+  back_projects: "← Projets"
+  other_lang_label: "Français"
+  entry_zero: "aucune entrée"
+  entry_one: "entrée"
+  entry_other: "entrées"
 en:
   months:
     - January
@@ -26,3 +34,11 @@ en:
     - October
     - November
     - December
+  nav_log: "Log"
+  nav_about: "About"
+  back: "← Back to the log"
+  back_projects: "← Projects"
+  other_lang_label: "English"
+  entry_zero: "no entries"
+  entry_one: "entry"
+  entry_other: "entries"

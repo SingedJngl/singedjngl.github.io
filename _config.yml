@@ -5,13 +5,13 @@ baseurl: ""
 email: "tom.carpanete@edu.ece.fr"
 github_user: "SingedJngl"
 
-# Lignes d'accroche affichees sur la page d'accueil (une par langue)
+# Lignes d'accroche affichées sur la page d'accueil (une par langue)
 intro:
-  fr: "Etudiant ingenieur en systemes embarques a l'ECE Paris. Je documente ici mes projets d'electronique et de firmware : ce que je construis, les choix techniques, et ce qui casse en cours de route."
+  fr: "Étudiant ingénieur en systèmes embarqués à l'ECE Paris. Je documente ici mes projets d'électronique et de firmware : ce que je construis, les choix techniques, et ce qui casse en cours de route."
   en: "Embedded systems engineering student at ECE Paris. I document my electronics and firmware projects here: what I build, the design decisions, and what breaks along the way."
 
 role:
-  fr: "Systemes embarques & electronique"
+  fr: "Systèmes embarqués & électronique"
   en: "Embedded systems & electronics"
 
 # ---- Build ----
