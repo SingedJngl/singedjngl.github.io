@@ -37,7 +37,7 @@ On est deux sur P1, je suis seul sur P2, et j'ajoute la coordination par-dessus.
 
 ## Ma place dans l'équipe
 
-Je reste un étudiant de 4A comme eux, avec un pôle technique à tenir. Je ne veux pas du mode « je distribue les tâches et je supervise ».
+Je reste un étudiant d'ING4 comme eux, avec un pôle technique à tenir.
 
 Concrètement, les décisions se discutent avant d'être prises, et une fois prises on avance sans les rouvrir. Sinon on repasse indéfiniment sur les mêmes sujets et plus rien n'avance. Je ne sais pas si le dosage est bon. Le risque que je vois déjà, c'est de ne pas réussir à imposer une décision impopulaire le jour où il faudra.
 
@@ -48,7 +48,7 @@ Deux outils, en place dès cette semaine :
 - un Drive partagé pour tout ce qui n'est pas du code : documents, CAO, comptes rendus de réunion, règlement du concours, photos ;
 - un dépôt GitHub pour le code, organisé par pôle.
 
-Si ce n'est pas posé en semaine 1, ça ne le sera jamais : chacun prend ses habitudes de son côté et on passe le reste du projet à chercher les fichiers.
+Si ce n'est pas posé en semaine 1, ça ne le sera jamais.
 
 ## Prise de contact
 
